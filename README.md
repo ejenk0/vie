@@ -11,11 +11,12 @@
 
 ## Success Requirments
 
-- [ ] Load and view a file: `vie myfile`
+- [x] Load and view a file: `vie myfile`
 - [ ] Navigable cursor
 - [ ] `vim` style basic edit binds: `x`,`r`, ...
 - [ ] `vim` style insert mode
 - [ ] `vim` style basic navigation binds: `w`,`e`,`$`, ...
+- [ ] Line numbers
 - [ ] Project files explorer/selector
 - [ ] Syntax highlighting for basic languages/config schemas
 - [ ] Smart "execute" bind for select languages

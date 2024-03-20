@@ -1,8 +1,14 @@
 // main.c
+// 
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+
+#include <sys/ioctl.h>
+
+#include <ncurses.h>
 
 /* Structs */
 
@@ -28,8 +34,32 @@ int main(int argc, char** args) {
         char* filename = args[1];
         file_vec = read_file_into_char_vector(file_vec, filename);
    }
+    
+    /* ncurses init */
+    initscr();            // Start curses mode
+    raw();                // Disable line buffering
+    keypad(stdscr, TRUE); // We get function keys, arrow keys etc.
+    noecho();             // Don't echo everything the user types
+    
 
-   _char_vector_debug(file_vec); 
+    // struct winsize win_dims;
+
+    /* Main loop */
+    while (1) {
+        // Get latest window size into win_dims
+        // if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &win_dims)) {
+                // fprintf(stderr, "Fatal error: Failed to fetch terminal dimensions\n");
+                // exit(EXIT_FAILURE);
+        // }
+
+        // int cols = win_dims.ws_col;
+        // int rows = win_dims.ws_row;
+        printw(file_vec.array);
+        refresh();
+        getch();
+        break;
+    }
+    endwin();
 }
 
 // Create a new char array with only a \0
@@ -50,7 +80,7 @@ struct CharVector char_vector_append(struct CharVector vec, char c) {
 
         vec.array = (char*) realloc(vec.array, sizeof(char) * new_capacity + 1);
         if (vec.array == NULL) {
-            fprintf(stderr, "Fatal error: unable to allocate enough memory for character vector");
+            fprintf(stderr, "Fatal error: unable to allocate enough memory for character vector\n");
             exit(EXIT_FAILURE);
         }
 
@@ -67,7 +97,7 @@ struct CharVector char_vector_append(struct CharVector vec, char c) {
 struct CharVector read_file_into_char_vector(struct CharVector vec, char* filename) {
     FILE* f = fopen(filename, "r");
     if (f == NULL) {
-        fprintf(stderr, "Fatal error: unable to open %s", filename);
+        fprintf(stderr, "Fatal error: unable to open %s\n", filename);
         exit(EXIT_FAILURE);
     }
 
@@ -77,7 +107,7 @@ struct CharVector read_file_into_char_vector(struct CharVector vec, char* filena
     }
 
     if (ferror(f)) {
-        fprintf(stderr, "Fatal error: error while reading %s", filename);
+        fprintf(stderr, "Fatal error: error while reading %s\n", filename);
         exit(EXIT_FAILURE);
     }
     fclose(f);

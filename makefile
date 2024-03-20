@@ -1,14 +1,15 @@
 CC = gcc
+CFLAGS = -lncurses
+DEBUGFLAGS = -g3
 
 vie: main
-	mv main vie
+	mv $< $@
 
 debug: main.c
-	gcc main.c -o dvie -g3
+	$(CC) $< -o $@ $(CFLAGS) $(DEBUGFLAGS)
 
-main: main.o
-
-main.o: main.c
+main: main.c
+	$(CC) $< -o $@ $(CFLAGS)
 
 clean:
-	rm vie main.o
+	rm -f vie debug

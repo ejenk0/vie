@@ -1,5 +1,8 @@
-
 # vie
+
+A lightweight, pure C, ncurses based command line text editor.
+
+Features in development intend to target the development usecase
 
 ## Purpose
 
@@ -23,4 +26,4 @@
 - [ ] Syntax highlighting for basic languages/config schemas
 - [ ] Smart "execute" bind for select languages
 
-
+[View the devlog](https://github.com/ejenk0/vie/blob/master/DEVLOG.md)

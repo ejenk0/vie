@@ -12,10 +12,12 @@
 ## Success Requirments
 
 - [x] Load and view a file: `vie myfile`
-- [ ] Navigable cursor
+- [x] Navigable cursor
+- [ ] `vim` style basic navigation binds
+    - [ ] 'g' home, ';' end, 'u' pgup, 'n' pgdwn
+    - [ ] 'w', 'e', '$' (or equivalent)
 - [ ] `vim` style basic edit binds: `x`,`r`, ...
 - [ ] `vim` style insert mode
-- [ ] `vim` style basic navigation binds: `w`,`e`,`$`, ...
 - [ ] Line numbers
 - [ ] Project files explorer/selector
 - [ ] Syntax highlighting for basic languages/config schemas
